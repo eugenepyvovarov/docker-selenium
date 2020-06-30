@@ -2,7 +2,7 @@
 # NOTE: DO *NOT* EDIT THIS FILE.  IT IS GENERATED.
 # PLEASE UPDATE Dockerfile.txt INSTEAD OF THIS FILE
 # !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-FROM selenium/node-chrome:3.141.59-20200525
+FROM selenium/node-chrome:local
 LABEL authors=SeleniumHQ
 
 USER seluser
@@ -19,3 +19,5 @@ COPY selenium.conf /etc/supervisor/conf.d/
 
 
 EXPOSE 4444
+EXPOSE 99
+

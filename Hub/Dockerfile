@@ -2,7 +2,7 @@
 # NOTE: DO *NOT* EDIT THIS FILE.  IT IS GENERATED.
 # PLEASE UPDATE Dockerfile.txt INSTEAD OF THIS FILE
 # !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-FROM selenium/base:3.141.59-20200525
+FROM selenium/base:local
 LABEL authors=SeleniumHQ
 
 USER seluser
@@ -12,6 +12,7 @@ USER seluser
 #========================
 
 EXPOSE 4444
+EXPOSE 99
 
 # As integer, maps to "maxSession"
 ENV GRID_MAX_SESSION 5

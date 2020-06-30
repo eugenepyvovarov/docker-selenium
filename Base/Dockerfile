@@ -1,12 +1,21 @@
-FROM ubuntu:bionic-20191029
+FROM ubuntu:bionic-20200526
 LABEL authors="Selenium <selenium-developers@googlegroups.com>"
+
+RUN apt-get -qqy update  \
+  && apt-get -qqy --no-install-recommends install ca-certificates \
+  && apt-get clean \
+  && rm -rf /var/lib/apt/lists/* /var/cache/apt/*
 
 #================================================
 # Customize sources for apt-get
 #================================================
-RUN  echo "deb http://archive.ubuntu.com/ubuntu bionic main universe\n" > /etc/apt/sources.list \
-  && echo "deb http://archive.ubuntu.com/ubuntu bionic-updates main universe\n" >> /etc/apt/sources.list \
+RUN  echo "deb https://ftp-stud.hs-esslingen.de/ubuntu bionic main universe\n" > /etc/apt/sources.list \
+  && echo "deb https://ftp-stud.hs-esslingen.de/ubuntu bionic-updates main universe\n" >> /etc/apt/sources.list \
   && echo "deb http://security.ubuntu.com/ubuntu bionic-security main universe\n" >> /etc/apt/sources.list
+
+# RUN  echo "deb http://archive.ubuntu.com/ubuntu bionic main universe\n" > /etc/apt/sources.list \
+#   && echo "deb http://archive.ubuntu.com/ubuntu bionic-updates main universe\n" >> /etc/apt/sources.list \
+#   && echo "deb http://security.ubuntu.com/ubuntu bionic-security main universe\n" >> /etc/apt/sources.list
 
 # No interactive frontend during docker build
 ENV DEBIAN_FRONTEND=noninteractive \
@@ -16,7 +25,7 @@ ENV DEBIAN_FRONTEND=noninteractive \
 # Miscellaneous packages
 # Includes minimal runtime used for executing non GUI Java programs
 #========================
-RUN apt-get -qqy update \
+RUN apt-get -qqy update  \
   && apt-get -qqy --no-install-recommends install \
     bzip2 \
     ca-certificates \
@@ -29,6 +38,7 @@ RUN apt-get -qqy update \
     curl \
     supervisor \
     gnupg2 \
+  && apt-get clean \
   && rm -rf /var/lib/apt/lists/* /var/cache/apt/* \
   && sed -i 's/securerandom\.source=file:\/dev\/random/securerandom\.source=file:\/dev\/urandom/' ./usr/lib/jvm/java-8-openjdk-amd64/jre/lib/security/java.security
 

@@ -19,3 +19,4 @@ COPY selenium.conf /etc/supervisor/conf.d/
 
 
 EXPOSE 4444
+EXPOSE 99

@@ -5,6 +5,7 @@ USER seluser
 #========================
 
 EXPOSE 4444
+EXPOSE 99
 
 # As integer, maps to "maxSession"
 ENV GRID_MAX_SESSION 5
